@@ -1,25 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import playersData from '../players';
 import crown from '../crown.png';
-// import silver from '../silver.png';
-import { getLeaderboard } from '../services/api';
+import silver from '../silver.png';
 
-const Leaderboard = () => {
-  const [leaderboard, setLeaderboard] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const result = await getLeaderboard();
-        console.log('Leaderboard data:', result.data);
-        setLeaderboard(result.data);
-      } catch (error) {
-        console.error('Error fetching leaderboard:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
+const DummyPlayer = () => {
   return (
     <div>
       <div className="w-full  flex">
@@ -29,7 +13,7 @@ const Leaderboard = () => {
             <img className="text-center mx-auto" src={crown} alt="" />
             Leaderboard
           </h1>
-          {/* <div className="flex justify-between my-4">
+          <div className="flex justify-between my-4">
             <div className="w-40 ">
               <img className="w-40 " src={silver} alt="" />
             </div>
@@ -39,7 +23,7 @@ const Leaderboard = () => {
             <div className="w-40 ">
               <img className="w-40 " src={silver} alt="" />
             </div>
-          </div> */}
+          </div>
           <header>
             <ul className="flex justify-between items-start w-[96%] mx-auto text-white font-semibold mt-32">
               <li>Rank</li>
@@ -51,51 +35,30 @@ const Leaderboard = () => {
               <li>Cube Relay </li>
             </ul>
           </header>
-
-          {leaderboard.map((item, index) => (
+          {playersData.players.map((item, index) => (
             <div
               key={index}
               className="relative bg-white bg-opacity-25 shadow-xl
-    backdrop-blur-md py-5 my-4 rounded-md hover:scale-105
-    cursor-pointer text-white"
+              backdrop-blur-md py-5 my-4 rounded-md hover:scale-105
+              cursor-pointer text-white"
             >
               <ul className="flex justify-between mx-4 ">
                 <li>{index + 1}</li>
                 <li className="text-start">{item.name}</li>
                 <li className="text-yellow-300 text-xl text-start ">
-                  {item.times?.['2x2'] !== undefined
-                    ? item.times['2x2'] !== '00:00.00'
-                      ? item.times['2x2']
-                      : 'N/P'
-                    : 'N/A'}
+                  {item.time['2x2']}
                 </li>
                 <li className="text-yellow-300 text-xl text-start ">
-                  {item.times?.['3x3'] !== undefined
-                    ? item.times['3x3'] !== '00:00.00'
-                      ? item.times['3x3']
-                      : 'N/P'
-                    : 'N/A'}
+                  {item.time['3x3']}
                 </li>
                 <li className="text-yellow-300 text-xl text-start ">
-                  {item.times?.['Pyraminx Cube'] !== undefined
-                    ? item.times['Pyraminx Cube'] !== '00:00.00'
-                      ? item.times['Pyraminx Cube']
-                      : 'N/P'
-                    : 'N/A'}
+                  {item.time['Pyraminx Cube']}
                 </li>
                 <li className="text-yellow-300 text-xl text-start ">
-                  {item.times?.['Mirror Cube'] !== undefined
-                    ? item.times['Mirror Cube'] !== '00:00.00'
-                      ? item.times['Mirror Cube']
-                      : 'N/P'
-                    : 'N/A'}
+                  {item.time['Mirror Cube']}
                 </li>
                 <li className="text-yellow-300 text-xl text-start ">
-                  {item.times?.['Cube Relay'] !== undefined
-                    ? item.times['Cube Relay'] !== '00:00.00'
-                      ? item.times['Cube Relay']
-                      : 'N/P'
-                    : 'N/A'}
+                  {item.time['Cube Relay']}
                 </li>
               </ul>
             </div>
@@ -106,4 +69,4 @@ const Leaderboard = () => {
   );
 };
 
-export default Leaderboard;
+export default DummyPlayer;

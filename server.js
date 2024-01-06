@@ -15,7 +15,13 @@ db.once('open', () => {
 
 const leaderboardSchema = new mongoose.Schema({
   name: String,
-  time: String,
+  times: {
+    '3x3': String,
+    '2x2': String,
+    'Pyraminx Cube': String,
+    'Mirror Cube': String,
+    'Cube Relay': String,
+  },
 });
 
 const Leaderboard = mongoose.model(
@@ -23,6 +29,7 @@ const Leaderboard = mongoose.model(
   leaderboardSchema,
   'leaderboard.data'
 );
+
 // Create an Express app
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -37,34 +44,40 @@ app.post('/addScore', async (req, res) => {
 
   // Save the score data to the MongoDB collection
   try {
-    const { name, time } = req.body;
+    const players = req.body;
 
-    // Create a new leaderboard entry
-    const newScore = new Leaderboard({
-      name,
-      time,
-    });
+    // Save each player's score to the database
+    await Promise.all(
+      players.map(async (player) => {
+        const { name, times } = player;
 
-    // Save the entry to the database
-    await newScore.save();
+        // Create a new leaderboard entry
+        const newScore = new Leaderboard({
+          name,
+          times,
+        });
+
+        // Save the entry to the database
+        await newScore.save();
+      })
+    );
 
     // Respond with a success message
-    res.status(200).json({ message: 'Score added successfully' });
+    res.status(200).json({ message: 'Scores added successfully' });
   } catch (error) {
     // Handle errors and respond with an error message
-    console.error('Error adding score:', error);
+    console.error('Error adding scores:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
 
 // Retrieve leaderboard data
-app.get('/Leaderboard', async (req, res) => {
+app.get('/leaderboard', async (req, res) => {
   try {
-    const leaderboardData = await Leaderboard.find({}, '-_id -__v').sort({
-      time: 1,
-    });
-
-    res.json(leaderboardData); // Send JSON response
+    console.log('Attempting to retrieve leaderboard data');
+    const leaderboardData = await Leaderboard.find({}, '-_id -__v');
+    console.log('Leaderboard data retrieved successfully:', leaderboardData);
+    res.json(leaderboardData);
   } catch (error) {
     console.error('Error retrieving leaderboard data:', error);
     res.status(500).json({ error: 'Internal server error' });
