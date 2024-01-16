@@ -3,6 +3,7 @@ import { addScore } from '../services/api';
 
 const AddScore = () => {
   const [name, setName] = useState('');
+  const [age, setAge] = useState('');
 
   const [times, setTimes] = useState({
     '3x3': { minutes: '00', seconds: '00', milliseconds: '00' },
@@ -36,16 +37,17 @@ const AddScore = () => {
         'Cube Relay': `${times['Cube Relay'].minutes}:${times['Cube Relay'].seconds}.${times['Cube Relay'].milliseconds}`,
       };
 
-      console.log('Submitting:', { name, formattedTimes });
+      console.log('Submitting:', { name, age, formattedTimes });
 
       // Send data to the backend
       // Send data to the backend
-      await addScore([{ name, times: formattedTimes }]);
+      await addScore([{ name, age, times: formattedTimes }]);
 
       // Handle success
       console.log('Score added successfully');
       alert('added');
       setName('');
+      setAge('');
       setTimes({
         '3x3': { minutes: '00', seconds: '00', milliseconds: '00' },
         '2x2': { minutes: '00', seconds: '00', milliseconds: '00' },
@@ -76,6 +78,22 @@ const AddScore = () => {
             onChange={(e) => setName(e.target.value)}
             placeholder="Player Name"
           />
+          <label htmlFor="age">Select Player Age Category</label>
+          <select
+            name="age"
+            id="age"
+            value={age}
+            onChange={(e) => setAge(e.target.value)}
+            className="border focus:border-indigo-500 border-slate-600 outline-none py-2 px-4 rounded-md"
+          >
+            <option value="">Select Category </option>
+            <option value="4-6">Age Category 4-6 </option>
+            <option value="6-8">Age Category 6-8 </option>
+            <option value="8-12">Age Category 8-12 </option>
+            <option value="6-12">Age Category 6-12 </option>
+            <option value="12_above">Age Category 12 and above </option>
+          </select>
+
           <div className="grid grid-cols-2 gap-4 mt-4">
             {Object.keys(times).map((type) => (
               <div key={type} className="grid gap-5">

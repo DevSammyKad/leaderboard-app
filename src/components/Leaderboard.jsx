@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import crown from '../crown.png';
 // import silver from '../silver.png';
+import gold from '../first-icon.png';
+import silver from '../second-icon.png';
+import bronze from '../third-icon.png';
 import { getLeaderboard } from '../services/api';
 
 const Leaderboard = () => {
@@ -25,27 +28,26 @@ const Leaderboard = () => {
       <div className="w-full  flex">
         <div className=" w-full mx-auto bg-gradient-to-tr from-[#8E55D8] to-[#5760E3] shadow-2xl rounded-lg overflow-hidden p-5">
           <h1 className="text-center my-7 font-bold text-yellow-300">
-            {' '}
             <img className="text-center mx-auto" src={crown} alt="" />
             Leaderboard
           </h1>
-          {/* <div className="flex justify-between my-4">
+          <div className="flex justify-between my-4">
             <div className="w-40 ">
               <img className="w-40 " src={silver} alt="" />
             </div>
             <div className="w-60 ">
-              <img className="w-60 " src={silver} alt="" />
+              <img className="w-60 " src={gold} alt="" />
             </div>
             <div className="w-40 ">
-              <img className="w-40 " src={silver} alt="" />
+              <img className="w-40 " src={bronze} alt="" />
             </div>
-          </div> */}
+          </div>
           <header>
             <ul className="flex justify-between items-start w-[96%] mx-auto text-white font-semibold mt-32">
               <li>Rank</li>
               <li>Player</li>
               <li>2x2 Time</li>
-              <li>3x3 Time</li>
+              <li>3x3 Time </li>
               <li>Pyraminx Cube </li>
               <li>Mirror Cube </li>
               <li>Cube Relay </li>

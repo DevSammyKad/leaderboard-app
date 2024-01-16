@@ -15,6 +15,7 @@ db.once('open', () => {
 
 const leaderboardSchema = new mongoose.Schema({
   name: String,
+  age: String,
   times: {
     '3x3': String,
     '2x2': String,
@@ -49,11 +50,14 @@ app.post('/addScore', async (req, res) => {
     // Save each player's score to the database
     await Promise.all(
       players.map(async (player) => {
-        const { name, times } = player;
+        const { name, age, times } = player;
+
+        console.log('Processing player:', { name, age, times });
 
         // Create a new leaderboard entry
         const newScore = new Leaderboard({
           name,
+          age,
           times,
         });
 

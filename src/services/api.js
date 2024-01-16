@@ -8,11 +8,16 @@ const api = axios.create({
 });
 
 export const addScore = (data) => api.post('/addScore', data);
-export const getLeaderboard = () => {
-  return api.get('/leaderboard').then((res) => {
+
+export const getLeaderboard = async () => {
+  try {
+    const res = await api.get('/leaderboard');
     return {
-      data: res.data.sort((a, b) => a.time - b.time),
+      data: res.data,
     };
-  });
+  } catch (error) {
+    console.error('Error fetching leaderboard:', error);
+    throw error; // Rethrow the error to propagate it to the caller
+  }
 };
 export default api;
