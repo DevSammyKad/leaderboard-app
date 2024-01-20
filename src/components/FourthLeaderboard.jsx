@@ -5,9 +5,7 @@ import silver from '../second-icon.png';
 import bronze from '../third-icon.png';
 import { getLeaderboard } from '../services/api';
 
-// 8 -12 age
-
-const ThirdLeaderboard = () => {
+const FourthLeaderboard = () => {
   const [leaderboard, setLeaderboard] = useState([]);
   const [sortBy, setSortBy] = useState('');
   const [currentEvent, setCurrentEvent] = useState('3x3');
@@ -57,7 +55,7 @@ const ThirdLeaderboard = () => {
   };
 
   // Get the first three students in the '8-12' age category
-  const filteredLeaderboard = leaderboard.filter((item) => item.age === '8-12');
+  const filteredLeaderboard = leaderboard.filter((item) => item.age === '6-12');
   const goldStudent =
     filteredLeaderboard.length > 0 ? filteredLeaderboard[0] : null;
   const silverStudent =
@@ -102,21 +100,16 @@ const ThirdLeaderboard = () => {
           <div className="flex justify-start mt-32 ">
             <div className="bg-white rounded-lg py-2 px-4">
               <h1 className="text-base my-2 mx-4 font-bold text-blue-500">
-                Select Your Event : Age 8-12
+                Select Your Event : Age 6-12
               </h1>
-              <button onClick={() => handleSort('3x3')} className="mx-4">
-                3x3 Time ({sortBy === '3x3' ? '▼' : '▲'})
-              </button>
-
-              <button onClick={() => handleSort('2x2')} className="mx-4">
-                2x2 ( {sortBy === '2x2' ? '▼' : '▲'})
-              </button>
-
               <button
-                onClick={() => handleSort('Pyraminx Cube')}
+                onClick={() => handleSort('Mirror Cube')}
                 className="mx-4"
               >
-                Pyraminx Cube ( {sortBy === 'Pyraminx Cube' ? '▼' : '▲'})
+                Mirror Cube ( {sortBy === 'Mirror Cube' ? '▼' : '▲'})
+              </button>
+              <button onClick={() => handleSort('Cube Relay')} className="mx-4">
+                Cube Relay ( {sortBy === 'Cube Relay' ? '▼' : '▲'})
               </button>
             </div>
           </div>
@@ -128,7 +121,7 @@ const ThirdLeaderboard = () => {
             </ul>
           </header>
           {leaderboard
-            .filter((item) => item.age === '8-12')
+            .filter((item) => item.age === '6-12')
             .map((item, index) => (
               <div
                 key={index}
@@ -156,4 +149,4 @@ const ThirdLeaderboard = () => {
   );
 };
 
-export default ThirdLeaderboard;
+export default FourthLeaderboard;

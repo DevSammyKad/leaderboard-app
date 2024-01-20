@@ -68,9 +68,20 @@ const SecondLeaderboard = () => {
       <div className="w-full  flex">
         <div className="w-full mx-auto bg-gradient-to-tr from-[#8E55D8] to-[#5760E3] shadow-2xl rounded-lg overflow-hidden p-5">
           <h1 className="text-center my-7 font-bold text-yellow-300">
-            <img className="text-center mx-auto" src={crown} alt="" />
+            <img
+              className="text-center mx-auto w-[150px] "
+              src={crown}
+              alt=""
+            />
             Leaderboard
           </h1>
+          {/* <div className=" flex justify-center items-center ">
+            <div className=" py2 px-4 rounded-md">
+              <h1 className="font-bold tracking-wide font text-lg text-indigo-500  bg-white px-4 py-2 rounded-md ">
+                Applauding the 6-8 Age Category Winners!
+              </h1>
+            </div>
+          </div> */}
           <div className="flex justify-between my-4 mx-4">
             <div className="w-28 ">
               <img className="w-28" src={silver} alt="" />
@@ -100,7 +111,7 @@ const SecondLeaderboard = () => {
           <div className="flex justify-start mt-32 ">
             <div className="bg-white rounded-lg py-2 px-4">
               <h1 className="text-base my-2 mx-4 font-bold text-blue-500">
-                Select Your Event :
+                Select Your Event : Age 6- 8
               </h1>
               <button onClick={() => handleSort('3x3')} className="mx-4">
                 3x3 Time ({sortBy === '3x3' ? '▼' : '▲'})

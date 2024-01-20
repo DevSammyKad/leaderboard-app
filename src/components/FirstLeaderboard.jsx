@@ -73,8 +73,8 @@ const FirstLeaderboard = () => {
           </h1>
           <div className=" flex justify-center items-center ">
             <div className=" py2 px-4 rounded-md">
-              <h1 className="font-bold tracking-wide font text-lg text-yellow-300  ">
-                Lorem ipsum dolor sit g elit.
+              <h1 className="font-bold tracking-wide font text-lg text-indigo-500  bg-white px-4 py-2 rounded-md ">
+                Congrats to Our 4-6 Cubing Champions!
               </h1>
             </div>
           </div>
@@ -107,7 +107,7 @@ const FirstLeaderboard = () => {
           <div className="flex justify-start mt-32 ">
             <div className="bg-white rounded-lg py-2 px-4">
               <h1 className="text-base my-2 mx-4 font-bold text-blue-500">
-                Select Your Event :
+                Select Your Event : Age 4-6
               </h1>
               <button onClick={() => handleSort('3x3')} className="mx-4">
                 3x3 Time ({sortBy === '3x3' ? '▼' : '▲'})

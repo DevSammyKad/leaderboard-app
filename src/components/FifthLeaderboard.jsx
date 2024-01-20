@@ -5,9 +5,7 @@ import silver from '../second-icon.png';
 import bronze from '../third-icon.png';
 import { getLeaderboard } from '../services/api';
 
-// 8 -12 age
-
-const ThirdLeaderboard = () => {
+const FifthLeaderboard = () => {
   const [leaderboard, setLeaderboard] = useState([]);
   const [sortBy, setSortBy] = useState('');
   const [currentEvent, setCurrentEvent] = useState('3x3');
@@ -57,7 +55,9 @@ const ThirdLeaderboard = () => {
   };
 
   // Get the first three students in the '8-12' age category
-  const filteredLeaderboard = leaderboard.filter((item) => item.age === '8-12');
+  const filteredLeaderboard = leaderboard.filter(
+    (item) => item.age === '12above'
+  );
   const goldStudent =
     filteredLeaderboard.length > 0 ? filteredLeaderboard[0] : null;
   const silverStudent =
@@ -73,6 +73,13 @@ const ThirdLeaderboard = () => {
             <img className="text-center mx-auto" src={crown} alt="" />
             Leaderboard
           </h1>
+          <div className=" flex justify-center items-center ">
+            <div className=" py2 px-4 rounded-md">
+              <h1 className="font-bold tracking-wide font text-lg text-indigo-500  bg-white px-4 py-2 rounded-md ">
+                Congrats to Our 12 Above Cubing Champions!
+              </h1>
+            </div>
+          </div>
           <div className="flex justify-between my-4 mx-4">
             <div className="w-28 ">
               <img className="w-28" src={silver} alt="" />
@@ -102,24 +109,32 @@ const ThirdLeaderboard = () => {
           <div className="flex justify-start mt-32 ">
             <div className="bg-white rounded-lg py-2 px-4">
               <h1 className="text-base my-2 mx-4 font-bold text-blue-500">
-                Select Your Event : Age 8-12
+                Select Your Event :
               </h1>
               <button onClick={() => handleSort('3x3')} className="mx-4">
                 3x3 Time ({sortBy === '3x3' ? '▼' : '▲'})
               </button>
-
               <button onClick={() => handleSort('2x2')} className="mx-4">
-                2x2 ( {sortBy === '2x2' ? '▼' : '▲'})
+                2x2 ({sortBy === '2x2' ? '▼' : '▲'})
               </button>
-
               <button
                 onClick={() => handleSort('Pyraminx Cube')}
                 className="mx-4"
               >
                 Pyraminx Cube ( {sortBy === 'Pyraminx Cube' ? '▼' : '▲'})
               </button>
+              <button
+                onClick={() => handleSort('Mirror Cube')}
+                className="mx-4"
+              >
+                Mirror Cube ( {sortBy === 'Mirror Cube' ? '▼' : '▲'})
+              </button>
+              <button onClick={() => handleSort('Cube Relay')} className="mx-4">
+                Cube Relay ( {sortBy === 'Cube Relay' ? '▼' : '▲'})
+              </button>
             </div>
           </div>
+
           <header>
             <ul className="flex justify-between items-start w-[96%] mx-auto text-white font-semibold mt-10 ">
               <li>Rank</li>
@@ -128,7 +143,7 @@ const ThirdLeaderboard = () => {
             </ul>
           </header>
           {leaderboard
-            .filter((item) => item.age === '8-12')
+            .filter((item) => item.age === '12above')
             .map((item, index) => (
               <div
                 key={index}
@@ -156,4 +171,4 @@ const ThirdLeaderboard = () => {
   );
 };
 
-export default ThirdLeaderboard;
+export default FifthLeaderboard;
