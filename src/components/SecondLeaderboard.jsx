@@ -65,7 +65,7 @@ const SecondLeaderboard = () => {
 
   return (
     <div>
-      <div className="w-full  flex">
+      <div className="w-full flex max-w-[600px] justify-center items-center mx-auto">
         <div className="w-full mx-auto bg-gradient-to-tr from-[#8E55D8] to-[#5760E3] shadow-2xl rounded-lg overflow-hidden p-5">
           <h1 className="text-center my-7 font-bold text-yellow-300">
             <img
@@ -75,13 +75,13 @@ const SecondLeaderboard = () => {
             />
             Leaderboard
           </h1>
-          {/* <div className=" flex justify-center items-center ">
+          <div className=" flex justify-center items-center ">
             <div className=" py2 px-4 rounded-md">
               <h1 className="font-bold tracking-wide font text-lg text-indigo-500  bg-white px-4 py-2 rounded-md ">
                 Applauding the 6-8 Age Category Winners!
               </h1>
             </div>
-          </div> */}
+          </div>
           <div className="flex justify-between my-4 mx-4">
             <div className="w-28 ">
               <img className="w-28" src={silver} alt="" />

@@ -1,4 +1,3 @@
-// Import necessary modules
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -7,7 +6,10 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 // MongoDB connection
-mongoose.connect(process.env.MONGODB_URI);
+const uri = process.env.MONGODB_URI; // MongoDB Atlas connection string from your .env file
+mongoose.connect(uri);
+
+console.log(mongoose.connection.host);
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
@@ -27,57 +29,42 @@ const leaderboardSchema = new mongoose.Schema({
   },
 });
 
-const Leaderboard = mongoose.model(
-  'Leaderboard',
-  leaderboardSchema,
-  'leaderboard.data'
-);
+const Leaderboard = mongoose.model('Player', leaderboardSchema, 'players');
 
-// Create an Express app
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
 app.use(bodyParser.json());
 app.use(cors());
 
-// Log incoming requests for the /addScore endpoint
 app.post('/addScore', async (req, res) => {
   console.log('Received request:', req.body);
 
-  // Save the score data to the MongoDB collection
   try {
     const players = req.body;
 
-    // Save each player's score to the database
     await Promise.all(
       players.map(async (player) => {
         const { name, age, times } = player;
-
         console.log('Processing player:', { name, age, times });
 
-        // Create a new leaderboard entry
         const newScore = new Leaderboard({
           name,
           age,
           times,
         });
 
-        // Save the entry to the database
         await newScore.save();
       })
     );
 
-    // Respond with a success message
     res.status(200).json({ message: 'Scores added successfully' });
   } catch (error) {
-    // Handle errors and respond with an error message
     console.error('Error adding scores:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
 
-// Retrieve leaderboard data
 app.get('/leaderboard', async (req, res) => {
   try {
     console.log('Attempting to retrieve leaderboard data');
@@ -90,7 +77,6 @@ app.get('/leaderboard', async (req, res) => {
   }
 });
 
-// Start the server
-app.listen(process.env.PORT, () => {
+app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

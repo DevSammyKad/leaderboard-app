@@ -65,7 +65,7 @@ const FirstLeaderboard = () => {
 
   return (
     <div>
-      <div className="w-full  flex">
+      <div className="w-full flex max-w-[600px] justify-center items-center mx-auto">
         <div className="w-full mx-auto bg-gradient-to-tr from-[#8E55D8] to-[#5760E3] shadow-2xl rounded-lg overflow-hidden p-5">
           <h1 className="text-center my-7 font-bold text-yellow-300">
             <img className="text-center mx-auto w-[100px]" src={crown} alt="" />
